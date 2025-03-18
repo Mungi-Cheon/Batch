@@ -5,10 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.study.batch.dto.OpenApiResponse;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,15 +15,16 @@ import org.springframework.web.client.RestTemplate;
 
 @Component
 @Slf4j
-@RequiredArgsConstructor
-public class OpenApiUtil {
+public class StayInfoUtils {
 
     @Value("${api.uri}")
     private String apiUri;
     @Value("${api.auth-key}")
     private String authKey;
-    private final ObjectMapper objectMapper;
-    private final RestTemplate restTemplate;
+    @Autowired
+    private ObjectMapper objectMapper;
+    @Autowired
+    private RestTemplate restTemplate;
 
     public OpenApiResponse getAllStayInfo(int pageNo){
         try {
