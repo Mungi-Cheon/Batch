@@ -1,4 +1,4 @@
-package com.study.config;
+package com.study.openapi.config;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
