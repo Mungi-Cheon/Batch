@@ -1,8 +1,8 @@
-package com.study.utils;
+package com.study.openapi.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.study.batch.dto.OpenApiResponse;
+import com.study.openapi.dto.OpenApiResponse;
 import java.net.URI;
 import java.net.URISyntaxException;
 import lombok.extern.slf4j.Slf4j;

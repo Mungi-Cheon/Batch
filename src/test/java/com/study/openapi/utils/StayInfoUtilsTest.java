@@ -1,9 +1,9 @@
-package com.study.utils;
+package com.study.openapi.utils;
 
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import com.study.batch.dto.OpenApiResponse;
+import com.study.openapi.dto.OpenApiResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

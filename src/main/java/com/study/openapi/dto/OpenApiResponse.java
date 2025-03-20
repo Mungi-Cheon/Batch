@@ -1,4 +1,4 @@
-package com.study.batch.dto;
+package com.study.openapi.dto;
 
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -13,49 +13,26 @@ import lombok.Setter;
 public class OpenApiResponse {
     private Response response;
 
+    @Setter
+    @Getter
     public static class Response {
         private Body body;
 
-        public Body getBody() {
-            return body;
-        }
-
-        public void setBody(Body body) {
-            this.body = body;
-        }
     }
 
+    @Setter
+    @Getter
     public static class Body {
         private int totalCount;
         private Items items;
 
-        public int getTotalCount() {
-            return totalCount;
-        }
-
-        public void setTotalCount(int totalCount) {
-            this.totalCount = totalCount;
-        }
-
-        public Items getItems() {
-            return items;
-        }
-
-        public void setItems(Items items) {
-            this.items = items;
-        }
     }
 
+    @Setter
+    @Getter
     public static class Items {
         private List<Item> item;
 
-        public List<Item> getItem() {
-            return item;
-        }
-
-        public void setItem(List<Item> item) {
-            this.item = item;
-        }
     }
 
     @Getter
