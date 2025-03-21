@@ -1,4 +1,4 @@
-package com.study.openapi.utils;
+package com.study.batch.job;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -6,6 +6,10 @@ import com.study.openapi.dto.OpenApiResponse;
 import java.net.URI;
 import java.net.URISyntaxException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.batch.item.ItemReader;
+import org.springframework.batch.item.NonTransientResourceException;
+import org.springframework.batch.item.ParseException;
+import org.springframework.batch.item.UnexpectedInputException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -15,7 +19,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Component
 @Slf4j
-public class StayInfoUtils {
+public class StayInfoReader implements ItemReader<OpenApiResponse> {
 
     @Value("${api.uri}")
     private String apiUri;
@@ -26,10 +30,16 @@ public class StayInfoUtils {
     @Autowired
     private RestTemplate restTemplate;
 
-    public OpenApiResponse getAllStayInfo(int pageNo){
+    @Override
+    public OpenApiResponse read()
+        throws Exception, UnexpectedInputException, ParseException, NonTransientResourceException {
+        return getAllStayInfo();
+    }
+
+    public OpenApiResponse getAllStayInfo(){
         try {
             URI uri = new URI(apiUri + "?serviceKey=" + authKey
-                + "&numOfRows=" + 50 + "&pageNo=" + pageNo+ "&MobileOS=AND&MobileApp=TestApp&_type=json");
+                + "&numOfRows=" + 1000 + "&pageNo=" + 1+ "&MobileOS=AND&MobileApp=TestApp&_type=json");
 
             ResponseEntity<String> responseEntity = restTemplate.getForEntity(uri, String.class);
 
