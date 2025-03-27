@@ -4,11 +4,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Getter
@@ -37,17 +37,17 @@ public class StayInfo {
         String areacode, String sigungucode, String firstimage, String firstimage2,
         double mapY, double mapX, int mapLevel, String tel, int likeCount, double rating){
         return StayInfo.builder()
-            .title(title)
-            .address1(address1)
-            .address2(address2)
-            .areacode(areacode)
-            .sigungucode(sigungucode)
-            .firstimage(firstimage)
-            .firstimage2(firstimage2)
+            .title(Objects.requireNonNullElse(title, ""))
+            .address1(Objects.requireNonNullElse(address1, ""))
+            .address2(Objects.requireNonNullElse(address2, ""))
+            .areacode(Objects.requireNonNullElse(areacode, ""))
+            .sigungucode(Objects.requireNonNullElse(sigungucode, ""))
+            .firstimage(Objects.requireNonNullElse(firstimage, ""))
+            .firstimage2(Objects.requireNonNullElse(firstimage2, ""))
             .mapY(mapY)
             .mapX(mapX)
             .mapLevel(mapLevel)
-            .tel(tel)
+            .tel(Objects.requireNonNullElse(tel, ""))
             .likeCount(likeCount)
             .rating(rating)
             .build();

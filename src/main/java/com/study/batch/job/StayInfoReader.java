@@ -6,10 +6,10 @@ import com.study.openapi.dto.OpenApiResponse;
 import java.net.URI;
 import java.net.URISyntaxException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.batch.core.StepExecution;
+import org.springframework.batch.core.annotation.BeforeStep;
+import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.item.ItemReader;
-import org.springframework.batch.item.NonTransientResourceException;
-import org.springframework.batch.item.ParseException;
-import org.springframework.batch.item.UnexpectedInputException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -29,21 +29,37 @@ public class StayInfoReader implements ItemReader<OpenApiResponse> {
     private ObjectMapper objectMapper;
     @Autowired
     private RestTemplate restTemplate;
+    private static final String KEY_PAGE_NO = "pageNo";
+    private int pageNo = 1;
+
+    @BeforeStep
+    public void beforeStep(StepExecution stepExecution){
+        ExecutionContext context = stepExecution.getExecutionContext();
+
+        if(context.containsKey(KEY_PAGE_NO)){
+            pageNo = context.getInt(KEY_PAGE_NO);
+        }else{
+            context.put(KEY_PAGE_NO, pageNo);
+        }
+    }
 
     @Override
-    public OpenApiResponse read()
-        throws Exception, UnexpectedInputException, ParseException, NonTransientResourceException {
+    public OpenApiResponse read() throws Exception{
         return getAllStayInfo();
     }
 
     public OpenApiResponse getAllStayInfo(){
+
+        log.info("stay info read start.");
+
         try {
             URI uri = new URI(apiUri + "?serviceKey=" + authKey
-                + "&numOfRows=" + 1000 + "&pageNo=" + 1+ "&MobileOS=AND&MobileApp=TestApp&_type=json");
+                + "&numOfRows=" + 1000 + "&pageNo=" + pageNo + "&MobileOS=AND&MobileApp=TestApp&_type=json");
 
             ResponseEntity<String> responseEntity = restTemplate.getForEntity(uri, String.class);
 
             if(responseEntity.getStatusCode() == HttpStatus.OK){
+                log.info("stay info read complete.");
                 return objectMapper.readValue(responseEntity.getBody(), OpenApiResponse.class);
             }
         } catch (URISyntaxException | JsonProcessingException e) {
