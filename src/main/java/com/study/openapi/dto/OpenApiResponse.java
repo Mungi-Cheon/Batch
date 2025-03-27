@@ -13,44 +13,36 @@ import lombok.Setter;
 public class OpenApiResponse {
     private Response response;
 
-    @Setter
-    @Getter
-    public static class Response {
-        private Body body;
-
+    public record Response(Body body) {
     }
 
-    @Setter
-    @Getter
-    public static class Body {
-        private int totalCount;
-        private Items items;
-
+    public record Body(
+        int totalCount, Items items
+    ) {
     }
 
-    @Setter
-    @Getter
-    public static class Items {
-        private List<Item> item;
-
+    public record Items(
+        List<Item> item
+    ) {
     }
 
-    @Getter
-    public static class Item {
-        private Long contentid;
-        private String title;
-        private String addr1;
-        private String addr2;
-        private String areacode;
-        private String sigungucode;
-        private String cat3;
-        private String firstimage;
-        private String firstimage2;
-        private Double mapy;
-        private Double mapx;
-        private Integer mlevel;
-        private String tel;
-        private int likeCount;
-        private Double rating;
+    public record Item (
+        long contentid,
+        String title,
+        String addr1,
+        String addr2,
+        String areacode,
+        String sigungucode,
+        String cat3,
+        String firstimage,
+        String firstimage2,
+        double mapy,
+        double mapx,
+        int mlevel,
+        String tel,
+        int likeCount,
+        double rating
+    ) {
+
     }
 }
