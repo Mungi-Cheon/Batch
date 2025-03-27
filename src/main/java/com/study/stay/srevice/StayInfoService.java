@@ -3,7 +3,7 @@ package com.study.stay.srevice;
 import com.study.stay.dto.StayInfoListResponse;
 import com.study.stay.dto.StayInfoResponse;
 import com.study.stay.entity.StayInfo;
-import com.study.stay.reposirory.StayInfoRepository;
+import com.study.stay.repository.StayInfoRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

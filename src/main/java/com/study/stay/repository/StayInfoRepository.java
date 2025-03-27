@@ -1,4 +1,4 @@
-package com.study.stay.reposirory;
+package com.study.stay.repository;
 
 import com.study.stay.entity.StayInfo;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -4,15 +4,18 @@ import com.study.openapi.dto.OpenApiResponse;
 import com.study.openapi.dto.OpenApiResponse.Item;
 import com.study.stay.entity.StayInfo;
 import java.util.List;
-import java.util.stream.Collectors;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.ItemProcessor;
 
+@Slf4j
 public class StayInfoProcessor implements ItemProcessor<OpenApiResponse, List<StayInfo>> {
 
     @Override
-    public List<StayInfo> process(OpenApiResponse response) throws Exception {
+    public List<StayInfo> process(OpenApiResponse response) {
+        log.info("process start.");
         List<Item> itemList = response.getResponse().getBody().getItems().getItem();
-        return response.getResponse().getBody().getItems().getItem().stream()
+
+        List<StayInfo> result = itemList.stream()
             .map(item -> StayInfo.from(
                 item.getTitle(),
                 item.getAddr1(),
@@ -28,6 +31,9 @@ public class StayInfoProcessor implements ItemProcessor<OpenApiResponse, List<St
                 item.getLikeCount(),
                 item.getRating()
             ))
-            .collect(Collectors.toList());
+            .toList();
+
+        log.info("process complete.");
+        return result;
     }
 }
