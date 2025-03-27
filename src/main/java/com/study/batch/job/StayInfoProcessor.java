@@ -13,23 +13,23 @@ public class StayInfoProcessor implements ItemProcessor<OpenApiResponse, List<St
     @Override
     public List<StayInfo> process(OpenApiResponse response) {
         log.info("process start.");
-        List<Item> itemList = response.getResponse().getBody().getItems().getItem();
+        List<Item> itemList = response.getResponse().body().items().item();
 
         List<StayInfo> result = itemList.stream()
             .map(item -> StayInfo.from(
-                item.getTitle(),
-                item.getAddr1(),
-                item.getAddr2(),
-                item.getAreacode(),
-                item.getSigungucode(),
-                item.getFirstimage(),
-                item.getFirstimage2(),
-                item.getMapy(),
-                item.getMapx(),
-                item.getMlevel(),
-                item.getTel(),
-                item.getLikeCount(),
-                item.getRating()
+                item.title(),
+                item.addr1(),
+                item.addr2(),
+                item.areacode(),
+                item.sigungucode(),
+                item.firstimage(),
+                item.firstimage2(),
+                item.mapy(),
+                item.mapx(),
+                item.mlevel(),
+                item.tel(),
+                item.likeCount(),
+                item.rating()
             ))
             .toList();
 
