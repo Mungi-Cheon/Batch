@@ -44,10 +44,3 @@
 ![recoredCount.png](src/main/resources/images/recoredCount.png)
 
 > 비어 있던 테이블이 Batch 시작 이후 11,000개 레코드가 삽입된 것을 볼 수 있다.
-
-
-## 회고
-
-### 좋았던 점
-
-### 아쉬웠던 점
